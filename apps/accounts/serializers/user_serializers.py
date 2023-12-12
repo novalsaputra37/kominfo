@@ -35,3 +35,17 @@ class CourseSerializer(serializers.ModelSerializer):
             "title",
             "user"
         ]
+
+class DataCourseSerializer(serializers.ModelSerializer):
+    id = serializers.CharField(source="user.id")
+    username = serializers.CharField(source="user.username")
+
+    class Meta:
+        model = Course
+        fields = [
+            "id",
+            "username",
+            "course",
+            "mentor",
+            "title",
+        ]

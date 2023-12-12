@@ -4,7 +4,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from apps.accounts.models import User, Course
-from apps.accounts.serializers.user_serializers import UserSerializer, CourseSerializer
+from apps.accounts.serializers.user_serializers import DataCourseSerializer, UserSerializer, CourseSerializer
 
 
 class UserListCreateAPIView(generics.ListCreateAPIView):
@@ -40,3 +40,9 @@ class CourseRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = CourseSerializer
     queryset = Course.objects.all()
     lookup_field = "id"
+
+
+class DataCourseListAPIView(generics.ListAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = DataCourseSerializer
+    queryset = Course.objects.all()

@@ -39,5 +39,11 @@ urlpatterns = [
             path("", user_views.CourseListCreateAPIView.as_view(), name="course-list"),
             path("<str:id>", user_views.CourseRetrieveUpdateDestroyAPIView.as_view(), name="course-retrieve-update-delete"),
         ])
+    ),
+    path(
+        "data/",
+        include([
+            path("course/", user_views.DataCourseListAPIView.as_view(), name="course-data-list")
+        ])
     )
 ]
