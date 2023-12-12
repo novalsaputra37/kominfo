@@ -42,7 +42,12 @@ class CourseRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     lookup_field = "id"
 
 
-class DataCourseListAPIView(generics.ListAPIView):
+class DataCourseSarjanaListAPIView(generics.ListAPIView):
     permission_classes = [IsAuthenticated]
     serializer_class = DataCourseSerializer
-    queryset = Course.objects.all()
+    queryset = Course.objects.filter(title__icontains="S.")
+
+class DataCourseNonSarjanaListAPIView(generics.ListAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = DataCourseSerializer
+    queryset = Course.objects.exclude(title__icontains="S.")

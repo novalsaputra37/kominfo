@@ -43,7 +43,8 @@ urlpatterns = [
     path(
         "data/",
         include([
-            path("course/", user_views.DataCourseListAPIView.as_view(), name="course-data-list")
+            path("course-sarjana/", user_views.DataCourseSarjanaListAPIView.as_view(), name="course-data-mentor-sarjana"),
+            path("course-non-sarjana/", user_views.DataCourseNonSarjanaListAPIView.as_view(), name="course-mentor-non-sarjana"),
         ])
     )
 ]
