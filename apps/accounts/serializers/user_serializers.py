@@ -49,3 +49,20 @@ class DataCourseSerializer(serializers.ModelSerializer):
             "mentor",
             "title",
         ]
+
+
+class TotalPesertaCourseSerializer(serializers.ModelSerializer):
+    jumlah_peserta = serializers.SerializerMethodField()
+
+
+    def get_jumlah_peserta(self, obj):
+        return Course.objects.filter(course=obj.course).count()
+
+    class Meta:
+        model = Course
+        fields = [
+            "course",
+            "mentor",
+            "title",
+            "jumlah_peserta"
+        ]

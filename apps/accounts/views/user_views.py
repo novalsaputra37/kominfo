@@ -4,7 +4,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from apps.accounts.models import User, Course
-from apps.accounts.serializers.user_serializers import DataCourseSerializer, UserSerializer, CourseSerializer
+from apps.accounts.serializers.user_serializers import DataCourseSerializer, TotalPesertaCourseSerializer, UserSerializer, CourseSerializer
 
 
 class UserListCreateAPIView(generics.ListCreateAPIView):
@@ -51,3 +51,8 @@ class DataCourseNonSarjanaListAPIView(generics.ListAPIView):
     permission_classes = [IsAuthenticated]
     serializer_class = DataCourseSerializer
     queryset = Course.objects.exclude(title__icontains="S.")
+
+class DataCourseTotalPesertaListAPIView(generics.ListAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = TotalPesertaCourseSerializer
+    queryset = Course.objects.all().distinct("course")
