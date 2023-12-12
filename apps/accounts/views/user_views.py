@@ -12,6 +12,15 @@ class UserListCreateAPIView(generics.ListCreateAPIView):
     serializer_class = UserSerializer
     queryset = User.objects.all()
 
+    def get_queryset(self):
+        user = self.request.user
+        if user.is_staff:
+            queryset = User.objects.all()
+        else:
+            queryset = User.objects.filter(id=user.id)
+
+        return queryset
+
 
 class UserRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsAuthenticated]
