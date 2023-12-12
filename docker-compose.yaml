@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  coofis_postgres:
+    container_name: coofis_postgres
+    image: postgres:latest
+    volumes:
+      - coofis_postgres_data:/var/lib/postgresql/data
+      - coofis_postgres_data_backups:/backups
+    environment:
+      POSTGRES_USER: coofis_user
+      POSTGRES_PASSWORD: coofis_password
+      POSTGRES_DB: coofis_db
+    ports:
+      - 5432:5432
+
+  coofis_pgadmin:
+    container_name: coofis_pgadmin
+    image: dpage/pgadmin4:latest
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@email.com
+      PGADMIN_DEFAULT_PASSWORD: konoha123
+    ports:
+      - "5050:80"
+    volumes:
+      - coofis_pgadmin_data:/var/lib/pgadmin
+
+volumes:
+  coofis_postgres_data: {}
+  coofis_postgres_data_backups: {}
+  coofis_pgadmin_data: {}
+
+networks:
+  coofis_network:
+    driver: bridge
